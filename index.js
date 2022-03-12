@@ -14,22 +14,18 @@ if(leadsFromLocalStorage) {
     // uchun render funksiya uni global variables orasidan qidirishga vaqt sarf qilmaydi.
 }
 
-const tabs = [
-    {url: "https://lex.uz"}, 
-    1
-];
-
 tabBtn.addEventListener("click", function() {
     // Grab the url of the current chrome tab
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         //since the only one tab should be active and in the current window at once
         //the return variable should only have one enrty
-        let activeTab = tabs[0];
-        let activeTabId = activeTab.id  // or do whatewer you need
+        // let activeTab = tabs[0];
+        // let activeTabId = activeTab.id  // or do whatewer you need
+        myLeads.push(tabs[0].url);
+        localStorage.setItem("myLeads", JSON.stringify(myLeads));
+        render(myLeads);
     });
-    myLeads.push(tabs[0].url);
-    localStorage.setItem("myLeads", JSON.stringify(myLeads));
-    render(myLeads);
+    
 });
 
 // biz argument qilib bergan har qanday arrayni render qiluvchi reusable funksiya!
